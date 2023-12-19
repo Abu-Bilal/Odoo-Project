@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="DgzWorksheetDropdown">
+        <div class="SystrayMenuContainer">
+            <div class="o_MessagingMenu dropdown">
+                <div class="o-dropdown dropdown o_debug_manager o-dropdown--no-caret">
+                    <a class="o_MessagingMenu_toggler dropdown-toggle o-no-caret o-dropdown--narrow" href="#"
+                       title="Dgz Worksheet" role="button" aria-haspopup="true" aria-expanded="">
+                        <i id='create_so' class="fa fa-file"/>
+                    </a>
+                </div>
+                <div id="systray_notif" class="o_MessagingMenu_dropdownMenu o-dropdown-menu"
+                     style="padding-top: 0%; width: 400px;">
+                    <div class="container_dgz">
+                        <button id="worksheet_button" class="button_dgz active">Worksheet
+                        </button>
+                        <button id="task_button" class="button_dgz">Task</button>
+                        <div class="systray_notification" style="max-height: 500px; overflow-y: auto;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="SystrayDetails">
+        <t t-if="users_data">
+            <t t-foreach="users_data" t-as="user_data">
+                <h6>
+                    <p>
+                        <span t-esc="user_data.user_id"/>
+                    </p>
+                </h6>
+                <table class="tabel table-bordered table_dgz">
+                    <tr class="but">
+                        <th>Description</th>
+                        <th>Project</th>
+                        <th>Task</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+                    <tbody>
+                        <t t-foreach="user_data.work_details" t-as="work">
+                            <tr>
+                                <td>
+                                    <span t-esc="work.description"/>
+                                </td>
+                                <td>
+                                    <span t-esc="work.project_id"/>
+                                </td>
+                                <td style="text-align: left;">
+                                    <span t-esc="work.task_id"/>
+                                </td>
+                                <td>
+                                    <span t-esc="work.time"/>
+                                </td>
+                                <td>
+                                    <span>
+                                        <t t-if="work.status == 'working'">
+                                            <i class="fa fa-play" title="Working"/>
+                                        </t>
+                                        <t t-elif="work.status =='onhold'">
+                                            <i class="fa fa-pause" title="Onhold"/>
+                                        </t>
+                                        <t t-else="">
+                                            <i class="fa fa-check" title="Done"/>
+                                        </t>
+                                    </span>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <div class="line-sheet"/>
+            </t>
+        </t>
+    </t>
+    <t t-name="TaskDetails">
+        <t t-foreach="task_data" t-as="user_data">
+            <h6>
+                <p>
+                    <span t-esc="user_data.user_name"/>
+                </p>
+            </h6>
+            <table class="table-bordered table_dgz">
+                <tr class="but">
+                    <th>Name</th>
+                    <th>Project</th>
+                    <th>Task</th>
+                    <th>Status</th>
+                </tr>
+                <t t-foreach="user_data.tasks" t-as="task">
+                    <tr>
+                        <td>
+                            <span t-esc="task.name"/>
+                        </td>
+                        <td>
+                            <span t-esc="task.project_id"/>
+                        </td>
+                        <td>
+                            <span t-esc="task.task_id"/>
+                        </td>
+                        <td>
+                            <span>
+                                <t t-if="task.status === 'working'">
+                                    <i class="fa fa-play" title="Working"/>
+                                </t>
+                                <t t-elif="task.status === 'onhold'">
+                                    <i class="fa fa-pause" title="Onhold"/>
+                                </t>
+                                <t t-else="">
+                                    <i class="fa fa-check" title="Done"/>
+                                </t>
+                            </span>
+                        </td>
+                    </tr>
+                </t>
+            </table>
+            <div class="line-sheet"/>
+        </t>
+    </t>
+</templates>

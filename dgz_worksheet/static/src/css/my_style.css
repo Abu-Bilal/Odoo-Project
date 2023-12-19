@@ -1,0 +1,36 @@
+.table_dgz {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    }
+.line-sheet {
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+    padding: 8px;
+    }
+.button_dgz {
+    border: none;
+    padding: 10px 75.6px;
+    background: #5a4f7f;
+    font-weight: bold;
+    color: white;
+    margin: 0px 0px;
+    }
+.button_dgz.active {
+    background-color: white;
+    color: #5a4f7f;
+    }
+.button_dgz:focus {
+    background-color: white;
+    color: #5a4f7f;
+    }
+.container_dgz {
+    margin-left: 2px;
+    }
+#systray_notif {
+    left: auto;
+    right: 0;
+    }
+.but{
+    color : black;
+    }

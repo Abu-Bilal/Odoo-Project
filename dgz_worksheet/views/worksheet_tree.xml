@@ -1,0 +1,88 @@
+<odoo>
+    <record id="all_worksheet_form_view" model="ir.ui.view">
+        <field name="name">Work</field>
+        <field name="model">dgz.worksheet.main</field>
+        <field name="arch" type="xml">
+            <form delete="false">
+                <style>
+                    .o_ChatterTopbar_actions{
+                    display:none !important;
+                    }
+                </style>
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="Checkin,Checkout"/>
+                </header>
+                <sheet>
+                    <div attrs="{'invisible': [('status', '!=', 'Checkout')]}"
+                         style="text-align: center; color: #5a4f7f;">
+                        <span class="o_form_label">Today records is checked out</span>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date" nolabel="1" decoration-bf="1" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="user_id" colspan="2" nolabel="1" decoration-bf="1" style="text-align: right;"/>
+                        </group>
+                    </group>
+                    <div style="text-align: right">
+                        <button string="Checkout" name="checkout_button" type="object" class="btn-danger"
+                                attrs="{'invisible': [('status', '=', 'Checkout')]}"/>
+                    </div>
+                    <br/>
+                    <group>
+                        <field name="worksheet_line_ids" nolabel="1" colspan="2" attrs="{'readonly': [('status', '=','Checkout' )]}">
+                            <tree editable="bottom">
+                                <field name="description"/>
+                                <field name="project_id"/>
+                                <field name="task_id"/>
+                                <field name="time" widget="monetary"/>
+                                <field name="status" required="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="worksheet_tree" model="ir.ui.view">
+        <field name="name">Work val</field>
+        <field name="model">dgz.worksheet.main</field>
+        <field name="arch" type="xml">
+            <tree default_order="id desc">
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="worksheet_line_ids"/>
+            </tree>
+        </field>
+    </record>
+    <record id="dgz_worksheet.action_worksheet_tree" model="ir.actions.act_window">
+        <field name="name">All Worksheet</field>
+        <field name="res_model">dgz.worksheet.main</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window.view" id="action_all_worksheet_tree">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="worksheet_tree"/>
+        <field name="act_window_id" ref="dgz_worksheet.action_worksheet_tree"/>
+    </record>
+    <record model="ir.actions.act_window.view" id="action_all_worksheet_form">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="all_worksheet_form_view"/>
+        <field name="act_window_id" ref="dgz_worksheet.action_worksheet_tree"/>
+    </record>
+
+    <data>
+        <menuitem id="menu_add_worksheet" parent="dgz_worksheet.menu_worksheet"
+                  action="dgz_worksheet.action_worksheet_tree" name="All Worksheet"
+                  sequence="3" groups="dgz_worksheet.ws_administrator"/>
+    </data>
+</odoo>

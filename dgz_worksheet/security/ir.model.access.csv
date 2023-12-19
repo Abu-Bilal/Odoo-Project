@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dgz_worksheet_main,access_dgz_worksheet_main,model_dgz_worksheet_main,,1,1,1,1
+access_dgz_worksheet_line,access_dgz_worksheet_line,model_dgz_worksheet_line,,1,1,1,1
+access_assign_task,access_assign_task,model_assign_task,,1,1,1,1

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.module.category" id="worksheet_management">
+        <field name="name">Worksheet</field>
+        <field name="description">User access</field>
+        <field name="sequence">20</field>
+    </record>
+
+        <record id="ws_employee" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="worksheet_management"/>
+    </record>
+
+    <record id="ws_administrator" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="worksheet_management"/>
+        <field name="implied_ids" eval="[(4, ref('ws_employee'))]"/>
+    </record>
+</odoo>
